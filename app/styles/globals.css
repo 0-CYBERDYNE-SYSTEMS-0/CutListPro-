@@ -1,0 +1,62 @@
+/* Reset some default browser styles */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+
+/* Custom styles for our app */
+.breakdownForm,
+.priceList,
+.projectSketch,
+.finalLayout {
+  margin-bottom: 2rem;
+}
+
+.breakdownForm input,
+.priceList input,
+.projectSketch input,
+.finalLayout input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.breakdownForm button,
+.priceList button,
+.projectSketch button,
+.finalLayout button {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.breakdownForm .breakdownMessage,
+.priceList .priceListMessage,
+.projectSketch .imageGenerationMessage,
+.finalLayout .finalLayoutMessage {
+  margin-top: 1rem;
+  color: green;
+}
