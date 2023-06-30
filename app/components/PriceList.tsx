@@ -1,25 +1,31 @@
-import { Box, List, ListItem, Link, Text } from "@chakra-ui/react";
-import { PriceList } from "../utils/priceFinder";
+import { Box, Text, VStack } from "@chakra-ui/react";
+import React from "react";
 
 interface PriceListProps {
-  priceList: PriceList;
+  priceList: {
+    item: string;
+    price: number;
+    link: string;
+  }[];
 }
 
-const PriceListComponent: React.FC<PriceListProps> = ({ priceList }) => {
+const PriceList: React.FC<PriceListProps> = ({ priceList }) => {
   return (
-    <Box id="price-list">
-      <Text fontSize="xl" fontWeight="bold">Price List</Text>
-      <List spacing={3}>
-        {priceList.map((item, index) => (
-          <ListItem key={index}>
-            <Text>{item.name}</Text>
-            <Text>Lowest Price: {item.lowestPrice}</Text>
-            <Link href={item.link} isExternal>Buy Here</Link>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+    <VStack spacing={4} align="stretch">
+      {priceList.map((item, index) => (
+        <Box key={index} p={5} shadow="md" borderWidth="1px">
+          <Text fontWeight="bold">{item.item}</Text>
+          <Text>Price: ${item.price}</Text>
+          <Text>
+            Link:{" "}
+            <a href={item.link} target="_blank" rel="noopener noreferrer">
+              {item.link}
+            </a>
+          </Text>
+        </Box>
+      ))}
+    </VStack>
   );
 };
 
-export default PriceListComponent;
+export default PriceList;

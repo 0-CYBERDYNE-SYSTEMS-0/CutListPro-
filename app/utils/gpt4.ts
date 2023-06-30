@@ -1,75 +1,69 @@
 ```typescript
 import axios from 'axios';
 
-const GPT4_API_URL = 'https://api.openai.com/v4/engines/davinci-codex/completions';
+const GPT4_API = process.env.GPT4_API;
+const GPT4_KEY = process.env.GPT4_KEY;
 
-export const handleProjectRequest = async (userRequest: string): Promise<string> => {
-  const response = await axios.post(GPT4_API_URL, {
-    prompt: userRequest,
-    max_tokens: 1000,
-  }, {
-    headers: {
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-      'Content-Type': 'application/json'
-    }
-  });
+export const getBreakdown = async (projectRequest: string) => {
+  try {
+    const response = await axios.post(
+      `${GPT4_API}/v1/engines/davinci-codex/completions`,
+      {
+        prompt: projectRequest,
+        max_tokens: 1000,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${GPT4_KEY}`
+        }
+      }
+    );
+    return response.data.choices[0].text.trim();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  return response.data.choices[0].text;
-}
+export const getPriceList = async (supplyList: string) => {
+  try {
+    const response = await axios.post(
+      `${GPT4_API}/v1/engines/davinci-codex/completions`,
+      {
+        prompt: supplyList,
+        max_tokens: 1000,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${GPT4_KEY}`
+        }
+      }
+    );
+    return response.data.choices[0].text.trim();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-export const getProjectBreakdown = async (userRequest: string): Promise<string> => {
-  const response = await axios.post(GPT4_API_URL, {
-    prompt: `Breakdown the following construction project: ${userRequest}`,
-    max_tokens: 1000,
-  }, {
-    headers: {
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-      'Content-Type': 'application/json'
-    }
-  });
-
-  return response.data.choices[0].text;
-}
-
-export const getPriceList = async (supplyList: string[]): Promise<string> => {
-  const response = await axios.post(GPT4_API_URL, {
-    prompt: `Find the lowest price for the following supplies within a certain geographical area: ${supplyList.join(', ')}`,
-    max_tokens: 1000,
-  }, {
-    headers: {
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-      'Content-Type': 'application/json'
-    }
-  });
-
-  return response.data.choices[0].text;
-}
-
-export const getProjectSketch = async (projectBreakdown: string): Promise<string> => {
-  const response = await axios.post(GPT4_API_URL, {
-    prompt: `Create an image generation prompt with the following project breakdown: ${projectBreakdown}`,
-    max_tokens: 1000,
-  }, {
-    headers: {
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-      'Content-Type': 'application/json'
-    }
-  });
-
-  return response.data.choices[0].text;
-}
-
-export const getFinalLayout = async (originalBreakdown: string, priceList: string, projectSketch: string): Promise<string> => {
-  const response = await axios.post(GPT4_API_URL, {
-    prompt: `Bring together the following: original breakdown - ${originalBreakdown}, price list - ${priceList}, and project sketch - ${projectSketch}`,
-    max_tokens: 1000,
-  }, {
-    headers: {
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-      'Content-Type': 'application/json'
-    }
-  });
-
-  return response.data.choices[0].text;
-}
+export const getFinalLayout = async (originalBreakdown: string, priceList: string, projectSketch: string) => {
+  try {
+    const response = await axios.post(
+      `${GPT4_API}/v1/engines/davinci-codex/completions`,
+      {
+        prompt: `${originalBreakdown}\n${priceList}\n${projectSketch}`,
+        max_tokens: 1000,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${GPT4_KEY}`
+        }
+      }
+    );
+    return response.data.choices[0].text.trim();
+  } catch (error) {
+    console.error(error);
+  }
+};
 ```

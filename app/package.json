@@ -1,7 +1,7 @@
 {
   "name": "nextjs-construction-project",
   "version": "1.0.0",
-  "description": "A Next.js application for construction project breakdown, price listing, and sketch generation",
+  "description": "A Next.js application for construction project breakdown, price list generation, image generation and final layout",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -10,11 +10,12 @@
   },
   "keywords": [
     "nextjs",
+    "typescript",
+    "tailwind",
+    "chakra.ui",
+    "openai",
     "construction",
-    "project",
-    "gpt4",
-    "diffusion",
-    "price-finder"
+    "project"
   ],
   "author": "",
   "license": "ISC",
@@ -34,9 +35,13 @@
   "devDependencies": {
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.19",
-    "autoprefixer": "^10.3.4",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "11.1.2",
+    "eslint-plugin-react": "^7.24.0",
     "postcss": "^8.3.6",
     "postcss-preset-env": "^6.7.0",
-    "typescript": "^4.4.3"
+    "prettier": "^2.3.2"
   }
 }

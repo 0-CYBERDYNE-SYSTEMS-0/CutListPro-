@@ -1,6 +1,6 @@
+```tsx
 import { ChakraProvider } from "@chakra-ui/react";
-import { ProjectRequestForm } from "../components/ProjectRequestForm";
-import { ProjectBreakdown } from "../components/ProjectBreakdown";
+import { BreakdownForm } from "../components/BreakdownForm";
 import { PriceList } from "../components/PriceList";
 import { ProjectSketch } from "../components/ProjectSketch";
 import { FinalLayout } from "../components/FinalLayout";
@@ -11,28 +11,32 @@ export default function Home() {
   const [priceList, setPriceList] = useState(null);
   const [projectSketch, setProjectSketch] = useState(null);
 
-  const handleProjectRequest = async (request) => {
-    const breakdown = await getProjectBreakdown(request);
-    setOriginalBreakdown(breakdown);
-    const prices = await getPriceList(breakdown.supplyList);
-    setPriceList(prices);
-    const sketch = await getProjectSketch(breakdown);
-    setProjectSketch(sketch);
-  };
-
   return (
     <ChakraProvider>
-      <ProjectRequestForm onProjectRequest={handleProjectRequest} />
-      {originalBreakdown && <ProjectBreakdown breakdown={originalBreakdown} />}
-      {priceList && <PriceList prices={priceList} />}
-      {projectSketch && <ProjectSketch sketch={projectSketch} />}
-      {originalBreakdown && priceList && projectSketch && (
-        <FinalLayout
-          breakdown={originalBreakdown}
-          prices={priceList}
-          sketch={projectSketch}
-        />
-      )}
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-bold mb-4">Construction Project Planner</h1>
+        <BreakdownForm setOriginalBreakdown={setOriginalBreakdown} />
+        {originalBreakdown && (
+          <PriceList
+            originalBreakdown={originalBreakdown}
+            setPriceList={setPriceList}
+          />
+        )}
+        {priceList && (
+          <ProjectSketch
+            originalBreakdown={originalBreakdown}
+            setProjectSketch={setProjectSketch}
+          />
+        )}
+        {projectSketch && (
+          <FinalLayout
+            originalBreakdown={originalBreakdown}
+            priceList={priceList}
+            projectSketch={projectSketch}
+          />
+        )}
+      </div>
     </ChakraProvider>
   );
 }
+```

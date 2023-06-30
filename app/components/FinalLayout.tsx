@@ -1,20 +1,32 @@
-import { Box } from "@chakra-ui/react";
-import { ProjectBreakdown } from "../components/ProjectBreakdown";
-import { PriceList } from "../components/PriceList";
-import { ProjectSketch } from "../components/ProjectSketch";
+```tsx
+import { Box, Heading, Text, Image } from "@chakra-ui/react";
+import { FC } from "react";
 
 interface FinalLayoutProps {
-  originalBreakdown: any;
-  priceList: any;
-  projectSketch: any;
+  originalBreakdown: string;
+  priceList: string;
+  projectSketch: string;
 }
 
-export const FinalLayout: React.FC<FinalLayoutProps> = ({ originalBreakdown, priceList, projectSketch }) => {
+const FinalLayout: FC<FinalLayoutProps> = ({ originalBreakdown, priceList, projectSketch }) => {
   return (
-    <Box id="final-layout">
-      <ProjectBreakdown breakdown={originalBreakdown} />
-      <PriceList priceList={priceList} />
-      <ProjectSketch sketch={projectSketch} />
+    <Box>
+      <Heading as="h2" size="lg">Final Project Layout</Heading>
+      <Box my={4}>
+        <Heading as="h3" size="md">Original Breakdown</Heading>
+        <Text>{originalBreakdown}</Text>
+      </Box>
+      <Box my={4}>
+        <Heading as="h3" size="md">Price List</Heading>
+        <Text>{priceList}</Text>
+      </Box>
+      <Box my={4}>
+        <Heading as="h3" size="md">Project Sketch</Heading>
+        <Image src={projectSketch} alt="Project Sketch" />
+      </Box>
     </Box>
   );
 };
+
+export default FinalLayout;
+```

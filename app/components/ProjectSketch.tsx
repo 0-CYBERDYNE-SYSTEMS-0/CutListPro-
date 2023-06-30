@@ -1,44 +1,32 @@
-```tsx
 import { Box, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { ProjectSketch as ProjectSketchType } from "../utils/diffusion";
 
 interface ProjectSketchProps {
   originalBreakdown: string;
 }
 
 const ProjectSketch: React.FC<ProjectSketchProps> = ({ originalBreakdown }) => {
-  const [projectSketch, setProjectSketch] = useState<ProjectSketchType | null>(null);
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/api/diffusion", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text: originalBreakdown }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setProjectSketch(data);
-      });
+    const fetchImage = async () => {
+      const response = await fetch(`/api/imageGeneration?breakdown=${encodeURIComponent(originalBreakdown)}`);
+      const data = await response.json();
+      setImageSrc(data.image);
+    };
+
+    fetchImage();
   }, [originalBreakdown]);
 
   return (
-    <Box id="project-sketch" p={5} shadow="md" borderWidth="1px">
-      {projectSketch ? (
-        <Image
-          boxSize="lg"
-          objectFit="cover"
-          src={projectSketch.imageURL}
-          alt="Project Sketch"
-        />
+    <Box id="projectSketch">
+      {imageSrc ? (
+        <Image src={imageSrc} alt="Project sketch" />
       ) : (
-        <p>Loading...</p>
+        <p>Loading project sketch...</p>
       )}
     </Box>
   );
 };
 
 export default ProjectSketch;
-```

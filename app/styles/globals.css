@@ -1,64 +1,62 @@
-/* Reset some basic elements */
-html, body, #__next {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-}
-
-/* Set up some default styles */
+/* Reset some default browser styles */
+html,
 body {
-  background-color: #f5f5f5;
-  color: #333;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  line-height: 1.6;
+  font-size: 18px;
 }
 
-/* Style the main container */
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .container {
-  max-width: 1200px;
+  max-width: 42rem;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 2rem 1.25rem;
 }
 
-/* Style the form */
-#project-request-form {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Custom styles for our app */
+.breakdownForm,
+.priceList,
+.projectSketch,
+.finalLayout {
+  margin-bottom: 2rem;
 }
 
-/* Style the project breakdown */
-#project-breakdown {
-  margin-top: 20px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.breakdownForm input,
+.priceList input,
+.projectSketch input,
+.finalLayout input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Style the price list */
-#price-list {
-  margin-top: 20px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.breakdownForm button,
+.priceList button,
+.projectSketch button,
+.finalLayout button {
+  width: 100%;
+  padding: 0.5rem;
 }
 
-/* Style the project sketch */
-#project-sketch {
-  margin-top: 20px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Style the final layout */
-#final-layout {
-  margin-top: 20px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.breakdownForm .breakdownMessage,
+.priceList .priceListMessage,
+.projectSketch .imageGenerationMessage,
+.finalLayout .finalLayoutMessage {
+  margin-top: 1rem;
+  color: green;
 }
